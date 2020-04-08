@@ -3,30 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/index.css">
-    <title>Aegis Todo App</title>
+    <link rel="stylesheet" href="..\css\index.css">
+    <script src="/js/index.js" defer></script>
+    <title>Akim TODO APP V1</title>
 </head>
 <body>
-    <header class="header"></header>
-    <main class="main">
-        <aside class="info">
-            <h1 class="aside-title">Already Done</h1>
-            <hr />
-<h2 class="aside-description">Description</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur inventore voluptate quia quo officiis voluptatum architecto aspernatur, harum voluptates aut, ratione ducimus dolores exercitationem eum numquam ipsa fugiat eligendi earum!</p>
-        </aside>
-        <section class="task">
-            <div class="date">
-                <img src="/img/Arrow 1.svg" alt="" class="arrow-left">
-                <img src="/img/Arrow 2.svg" alt="" class="arrow-right">
+    <div class="container">
+        <header class="header">
+            <h1 class="header_title">Akim Todo App</h1>
+            <nav class="header_nav">
+                <button type="submit" id="newItem"class="btn btn-success">New Item</button>
+                <button type="submit" id="deleteItem"class="btn btn-danger">Delete Items</button>
+            </nav>
+        </header>
+        <main id="app">
+            <section class="todo_list">
+                <ul id="item-container">
+                    <li class="todo_item">
+                        <svg class="icon icon-box check fade-out" width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="47" height="47" rx="10" fill="black"/>
+                            <rect x="5" y="5" width="37" height="37" rx="5" fill="#f3f1f1"/>
+                        </svg>
+                        <svg class="icon icon-box" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M35.05 14.27L19.847 30.508L12.212 23.498C11.195 22.564 9.613 22.633 8.68 23.649C7.747 24.665 7.814 26.248 8.831 27.181L18.289 35.865C18.768 36.305 19.374 36.523 19.978 36.523C20.646 36.523 21.312 36.257 21.804 35.732L38.7 17.688C39.643 16.68 39.592 15.098 38.584 14.154C37.576 13.211 35.994 13.264 35.05 14.27ZM36.834 0.5H11.166C5.285 0.5 0.5 5.285 0.5 11.166V36.834C0.5 42.715 5.285 47.5 11.166 47.5H36.834C42.715 47.5 47.5 42.715 47.5 36.834V11.166C47.5 5.285 42.715 0.5 36.834 0.5ZM42.5 36.834C42.5 39.958 39.958 42.5 36.834 42.5H11.166C8.042 42.5 5.5 39.958 5.5 36.834V11.166C5.5 8.042 8.042 5.5 11.166 5.5H36.834C39.958 5.5 42.5 8.042 42.5 11.166V36.834Z"fill="black"/>
+                        </svg>
+                        item1
+                    </li> 
+                </ul>
+            </section>
+            <div id="modal" class="see">
+                <textarea id="item-content" name="item-content" id="" cols="30" rows="10">
+    
+                </textarea>
+                <div class="action-btn">
+                    <button type="submit" id="add" class="btn btn-success">Add</button>
+                    <button type="submit" id="cancel" class="btn btn-danger">Cancel</button>
+                </div>
             </div>
-            <div class="task-list"></div>
-        </section>
-        <section class="utilities">
-            <img src="/img/calendar.svg" alt="" class="calendar">
-            <button class="add-task">Add Task</button>
-        </section>
-    </main>
+        </main>
+    </div>
+
 </body>
 </html>
