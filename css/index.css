@@ -24,6 +24,7 @@ body{
     max-width: 450px;
     margin: 0 auto;
     overflow: hidden;
+    border: 1px solid #000;
 }
 .form-control{
     position: relative;
@@ -38,6 +39,7 @@ body{
 }
 
 .new-item{
+    width: 409px;
     position: relative;
     border: none;
     border-radius: 5px;

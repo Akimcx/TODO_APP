@@ -7,5 +7,3 @@ My JS code isn't perfect but I'm planning to upgrade it.
 Also gonna implement the filter later
 
 # Issue
--Chrome base browser
-    The icon to add not well placed - minor bug
