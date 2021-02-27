@@ -1,87 +1,50 @@
-const newItem = document.getElementById("new-item")
-const addIcon = document.getElementById("fa")
-const todoList = document.getElementById("todo-list")
+const addItemInput = document.getElementById("newItem")
+const form = document.getElementById("form")
+const addBtn = document.getElementById("addBtn")
+const todoList = document.getElementById("todoList")
 let checksIcon = [...document.getElementsByClassName("check")]
 let trashes = [...document.getElementsByClassName("trash")]
 
-addIcon.addEventListener("click",addItem)
+addBtn.addEventListener("click", addTodo)
 
-newItem.addEventListener("keypress", e => {
-    if (e.key === "Enter") {
-        addItem() 
-    }
+form.addEventListener("submit", e => {
+    e.preventDefault()
+    addTodo()
 })
 
-function addListener() {
-    checksIcon.forEach(checkIcon => {
-        checkIcon.addEventListener("click", e => {
-           const targetElt = e.target
-           let liElt = targetElt.parentElement
-           
-            if (liElt.nodeName !== "LI") {
-                liElt = liElt.parentElement
-            }
-    
-           liElt.classList.add("checked")
-           liElt.addEventListener("animationend", () => {
-               liElt.classList.add("done","deleted")
-               liElt.addEventListener("animationend", () =>{
-                   todoList.removeChild(liElt)
-               })
-           })
-        })
-    })
-    
-    trashes.forEach(trash => {
-        trash.addEventListener("click", e => {
-            const targetElt = e.target
-            let liElt = targetElt.parentElement
-            
-             if (liElt.nodeName !== "LI") {
-                 liElt = liElt.parentElement
-             }
-    
-             liElt.classList.add("deleted")
-               liElt.addEventListener("animationend", () =>{
-                   todoList.removeChild(liElt)
-               })
-        })
-    })
-}
-
-
-function createItem(itemValue) {
+function createTodo(todoContent) {
+    const div = document.createElement("div")
     const li = document.createElement("li")
-    const spanCheckIcon = document.createElement("span")
-    const spanTrashIcon = document.createElement("span")
-    const checkIcon = document.createElement("i")
-    const trashIcon = document.createElement("i")
+    const button = document.createElement("button")
+    const input = document.createElement("input")
 
-    li.classList.add("todo-item")
-    li.innerText = itemValue
+    div.classList.add("todo")
+    button.classList.add("delete")
+    input.type = "checkbox"
 
-    spanCheckIcon.classList.add("icon", "check")
-    checkIcon.classList.add("far","fa-check-circle")
-    spanCheckIcon.appendChild(checkIcon)
-    
-    spanTrashIcon.classList.add("icon", "trash")
-    trashIcon.classList.add("far","fa-trash-alt")
-    spanTrashIcon.appendChild(trashIcon)
+    button.textContent = '×'
+    li.textContent = todoContent
 
-    li.appendChild(spanCheckIcon)
-    li.appendChild(spanTrashIcon)
+    div.appendChild(input)
+    div.appendChild(li).appendChild(button)
 
-    return li
+    button.addEventListener("click", () => {
+        div.remove()
+    })
+
+    input.addEventListener("change", () => {
+        div.classList.toggle("done")
+    })
+
+    return div
 }
 
-function addItem() {
-    const itemValue = newItem.value
-    if (itemValue) {
-        const li = createItem(itemValue)
+function addTodo() {
+    const inputValue = addItemInput.value
+    if (inputValue) {
+        const li = createTodo(inputValue)
         todoList.appendChild(li)
-        newItem.value = ""
-        checksIcon = [...document.getElementsByClassName("check")]
-        trashes = [...document.getElementsByClassName("trash")]
-        addListener()
+        addItemInput.value = ""
+        addItemInput.focus
     }
 }
