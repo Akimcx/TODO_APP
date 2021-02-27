@@ -7,10 +7,10 @@ My JS code isn't perfect but I'm planning to upgrade it.
 Also gonna implement the filter later
 
 ## Todo
-+ Make the todos editable
-+ Make the select actually work
-+ Add Local Storage storage
-+ Add a better "done" style
-+ Add draggable feature (for fun 😁)
-+ Make a custom element for the select dropdown
-+ Make a custom element for the checkbox button
++ [ ] Make the todos editable
++ [ ] Make the select actually work
++ [ ] Add Local Storage storage
++ [ ] Add a better "done" style
++ [ ] Add draggable feature (for fun 😁)
++ [ ] Make a custom element for the select dropdown
++ [ ] Make a custom element for the checkbox button
