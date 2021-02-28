@@ -52,7 +52,8 @@ body{
     font-size: 20px;
 }
 
-.form-control:focus {
+.form-control:focus,
+.editArea:focus {
     outline: 2px solid var(--primary-clr);
     outline-offset: 2px;
     -moz-outline-radius: 5px;
@@ -148,6 +149,41 @@ body{
 
 .done li {
     color: rgba(255,255,255, .4);    
+}
+
+.modal {
+    background-color: rgba(48, 52, 83, .9);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.modal.show {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.editArea {
+    width: 70%;
+    height: 40%;
+    border-radius: 5px;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.saveButton {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 768px){
