@@ -1,83 +1,132 @@
-const addItemInput = document.getElementById("newItem")
-const form = document.getElementById("form")
-const addBtn = document.getElementById("addBtn")
-const todoList = document.getElementById("todoList")
+const criteria = {
+	default: 'Uncomplete',
+	complete: 'Complete',
+	none: 'All',
+}
+const addBtn = document.getElementById('addBtn')
+addBtn.addEventListener('click', addTodo)
 
-addBtn.addEventListener("click", addTodo)
-
-form.addEventListener("submit", e => {
-    e.preventDefault()
-    addTodo()
+const form = document.getElementById('form')
+form.addEventListener('submit', e => {
+	e.preventDefault()
+	addTodo()
 })
 
+let filterCriteria = criteria.none
+const filter = document.getElementById('filter')
+filter.childNodes.forEach(child => {
+	child.addEventListener('click', e => {
+		if (e.target.value === filter) return
+		if (e.target.value === criteria.none) {
+			filterCriteria = criteria.none
+			clearFilter()
+			return
+		}
+		const criterion = child.value.toLowerCase()
+		const filteredTodos = filterTodoList(criterion)
+		clearFilter()
+		hideFilteredTodos(filteredTodos)
+		filterCriteria = e.target.value
+	})
+})
+
+const todoList = document.getElementById('todoList')
+function filterTodoList(criterion) {
+	if (todoList.childElementCount === 0) return
+	const children = todoList.childNodes
+	return (filteredTodos = Array.from(children).filter(
+		todo => todo.dataset.state !== criterion
+	))
+}
+
+function hideFilteredTodos(todos) {
+	todos.forEach(todo => {
+		todo.classList.add('hide')
+	})
+}
+
+function clearFilter() {
+	todoList.childNodes.forEach(todo => {
+		todo.classList.remove('hide')
+	})
+}
+
 function createTodo(todoContent) {
-    const div = document.createElement("div")
-    const li = document.createElement("li")
-    const button = document.createElement("button")
-    const input = document.createElement("input")
+	const div = document.createElement('div')
+	const li = document.createElement('li')
+	const button = document.createElement('button')
+	const input = document.createElement('input')
 
-    div.classList.add("todo")
-    button.classList.add("delete")
-    input.type = "checkbox"
+	div.classList.add('todo')
+	button.classList.add('delete')
+	input.type = 'checkbox'
 
-    button.textContent = '×'
-    li.textContent = todoContent
+	div.dataset.state = criteria.default
 
-    div.appendChild(input)
-    div.appendChild(li).appendChild(button)
+	button.textContent = '×'
+	li.textContent = todoContent
 
-    button.addEventListener("click", () => {
-        div.remove()
-    })
+	div.appendChild(input)
+	div.appendChild(li).appendChild(button)
 
-    input.addEventListener("change", () => {
-        div.classList.toggle("done")
-    })
+	button.addEventListener('click', () => {
+		div.remove()
+	})
 
-    div.addEventListener('dblclick', e => {
-        showEditionModal()
-        editTodo(e.target)
-    })
+	input.addEventListener('change', () => {
+		div.classList.toggle('done')
+		div.dataset.state = div.classList.contains('done')
+			? criteria.complete
+			: criteria.complete
+		if (
+			div.dataset.state !== filterCriteria &&
+			filterCriteria !== criteria.none
+		) {
+			div.classList.add('hide')
+		}
+	})
 
-    return div
+	const modal = document.getElementById('modal')
+	div.addEventListener('dblclick', e => {
+		showModal(modal)
+		editTodo(e.target)
+	})
+
+	return div
 }
 
 function addTodo() {
-    const inputValue = addItemInput.value
-    if (inputValue) {
-        const li = createTodo(inputValue)
-        todoList.appendChild(li)
-        addItemInput.value = ""
-        addItemInput.focus
-    }
-}
-
-function showEditionModal() {
-    const modal = document.getElementById('modal')
-    modal.classList.add('show')
-    modal.addEventListener('click', e => {
-        if (e.target === modal) {
-            hideEditionModal()
-        }
-    })
+	const addItemInput = document.getElementById('newItem')
+	const inputValue = addItemInput.value
+	if (!inputValue) return
+	const li = createTodo(inputValue)
+	todoList.appendChild(li)
+	addItemInput.value = ''
+	addItemInput.focus
 }
 
 function editTodo(todo) {
-    const editArea = document.getElementById('editArea')
-    const saveButton = document.querySelector('.saveButton')
-    const edit = todo.querySelector('li').firstChild
-    editArea.value = edit.textContent
-    editArea.focus()
+	const editArea = document.getElementById('editArea')
+	const saveButton = document.querySelector('.saveButton')
+	const edit = todo.querySelector('li').firstChild
+	editArea.value = edit.textContent
+	editArea.focus()
 
-    saveButton.addEventListener('click', () => {
-        console.log(`edit content: ${edit.textContent} | editArea content: ${editArea.value}`);
-        edit.textContent = editArea.value
-        console.log(`edit content: ${edit.textContent} | editArea content: ${editArea.value}`);
-        hideEditionModal()
-    }, { once: true })
+	saveButton.addEventListener(
+		'click',
+		() => {
+			edit.textContent = editArea.value
+			saveButton.parentElement.classList.remove('show')
+		},
+		{ once: true }
+	)
 }
 
-function hideEditionModal() {
-    const modal = document.getElementById('modal')
-    modal.classList.remove('show')
+function showModal(modal) {
+	modal.classList.add('show')
+	modal.addEventListener('click', e => {
+		if (e.target === modal) {
+			modal.classList.remove('show')
+		}
+	})
 }

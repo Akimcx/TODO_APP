@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Akim's Todo App</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<script src="../js/index.js" defer></script>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akim's Todo App</title>
-    <link rel="stylesheet" href="../css/index.css">
-    <script src="../js/index.js" defer></script>
-</head>
-
-<body>
-    <header class="header">
-        <div class="container">
-            <h1 class="header-title">Akim's Todo App</h1>
-            <form class="form" id="form">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="newItem" id="newItem">
-                    <div class="addBtn" id="addBtn">
-                        <img src="../assets/plus.svg" alt="Plus Icon" title="Created by icon 54 from the Noun Project">
-                    </div>
-                </div>
-                <select name="filter" id="filter" class="filter">
-                    <option value="All">All</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Uncompleted">Uncompleted</option>
-                </select>
-            </form>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <ul class="todoList" id="todoList"></ul>
-        </div>
-    </main>
-    <div class="modal" id="modal">
-        <textarea id="editArea" class="editArea"></textarea>
-        <button class="saveButton">Save</button>
-    </div>
-</body>
-
+	<body>
+		<header class="header">
+			<div class="container">
+				<h1 class="header-title">Akim's Todo App</h1>
+				<form class="form" id="form">
+					<div class="form-group">
+						<input
+							type="text"
+							class="form-control"
+							name="newItem"
+							id="newItem"
+						/>
+						<div class="addBtn" id="addBtn">
+							<img
+								src="../assets/plus.svg"
+								alt="Plus Icon"
+								title="Created by icon 54 from the Noun Project"
+							/>
+						</div>
+					</div>
+					<select name="filter" id="filter" class="filter">
+						<option value="All">All</option>
+						<option value="Completed">Completed</option>
+						<option value="Uncompleted">Uncompleted</option>
+					</select>
+				</form>
+			</div>
+		</header>
+		<main>
+			<div class="container">
+				<ul class="todoList" id="todoList"></ul>
+			</div>
+		</main>
+		<div class="modal" id="modal">
+			<textarea id="editArea" class="editArea"></textarea>
+			<button class="saveButton">Save</button>
+		</div>
+	</body>
 </html>
